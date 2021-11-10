@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     private Animator _animator;
     private Vector2 _startPosition;
     private float _tempSpeed;
+    private bool _isWaiting;
 
     private void Start()
     {
@@ -39,13 +40,13 @@ public class Enemy : MonoBehaviour
         float xPosition = Mathf.MoveTowards(transform.position.x, _target.position.x, _speed * Time.deltaTime) - transform.position.x;
         transform.position += new Vector3(xPosition, 0);        
 
-        if (transform.position.x <= _startPosition.x || transform.position.x >= _target.position.x)
+        if (transform.position.x <= _startPosition.x && _isWaiting == false || transform.position.x >= _target.position.x && _isWaiting == false)
         {
             _tempSpeed *= -1;
 
-            StartCoroutine(Wait());       
-        }  
-        
+            _isWaiting = true;
+            StartCoroutine(Wait());
+        }      
     }
 
     private IEnumerator Wait()
@@ -61,6 +62,8 @@ public class Enemy : MonoBehaviour
         _speed = _tempSpeed;
 
         Flip();
+
+        _isWaiting = false;
     }
 
     private void Flip()
