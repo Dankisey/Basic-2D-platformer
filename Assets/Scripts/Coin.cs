@@ -6,9 +6,9 @@ public class Coin: MonoBehaviour
 
     private AudioPlayer _audioPlayer;
 
-    private void Start()
+    public void Init(AudioPlayer audioPlayer)
     {
-        _audioPlayer = (AudioPlayer)FindObjectOfType(typeof(AudioPlayer));
+        _audioPlayer = audioPlayer;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

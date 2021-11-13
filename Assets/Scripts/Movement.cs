@@ -8,8 +8,11 @@ public class Movement : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
+    [SerializeField] private float _angle;
     [SerializeField] private float _raycastDistance;
     [SerializeField] private ContactFilter2D _contactFilter;
+
+    private const string Horizontal = "Horizontal";
 
     private SpriteRenderer _renderer;
     private Rigidbody2D _rigidbody;
@@ -37,8 +40,8 @@ public class Movement : MonoBehaviour
 
     private void Move()
     {
-        _movementDirection.x = Input.GetAxis("Horizontal");
-        _animator.SetFloat("MoveX", Mathf.Abs(_movementDirection.x));
+        _movementDirection.x = Input.GetAxis(nameof(Horizontal));
+        _animator.SetFloat(PlayerAnimatorController.Params.MoveX, Mathf.Abs(_movementDirection.x));
         transform.Translate(_speed * Time.deltaTime * _movementDirection.x, 0, 0);
     }
 
@@ -50,16 +53,16 @@ public class Movement : MonoBehaviour
     private bool CheckGround()
     {
         RaycastHit2D[] results = new RaycastHit2D[1];
-        int contacts = Physics2D.Raycast(transform.position, Vector2.down, _contactFilter, results, _raycastDistance);
+        int contacts = Physics2D.BoxCast(transform.position, transform.localScale, _angle, Vector2.down, _contactFilter, results, _raycastDistance);
 
         if (contacts > 0)
         {
-            _animator.SetBool("OnGround", true);
+            _animator.SetBool(PlayerAnimatorController.States.OnGround, true);
             return true;
         }
         else
         {
-            _animator.SetBool("OnGround", false);
+            _animator.SetBool(PlayerAnimatorController.States.OnGround, false);
             return false;
         }
     }

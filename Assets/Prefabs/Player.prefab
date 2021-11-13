@@ -168,7 +168,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _jumpForce: 7
-  _raycastDistance: 0.6
+  _angle: 0
+  _raycastDistance: -0.1
   _contactFilter:
     useTriggers: 0
     useLayerMask: 1

@@ -1,17 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Finish : MonoBehaviour
 {
     [SerializeField] private AudioClip _enterSound;
+    [SerializeField] private GameObject _audioPlayerPrefab;
 
     private AudioPlayer _audioPlayer;
     private bool _finished;
 
     private void Start()
     {
-        _audioPlayer = (AudioPlayer)FindObjectOfType(typeof(AudioPlayer));
+        var audioPlayer = Instantiate(_audioPlayerPrefab);
+        _audioPlayer = audioPlayer.GetComponent<AudioPlayer>();
         _finished = false;
     }
 

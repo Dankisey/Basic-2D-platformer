@@ -123,3 +123,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enterSound: {fileID: 8300000, guid: 35c9a2a67fb51774c8de6a92fb592186, type: 3}
+  _audioPlayerPrefab: {fileID: 3330785670154951824, guid: 1026b5c48eb9498418b1551049c86a15, type: 3}
