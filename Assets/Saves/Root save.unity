@@ -3114,8 +3114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0069051896ca4f840846288901dbe868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _coinPrefab: {fileID: 3658661539313868264, guid: b65f558870965dd4fa3cd067ac8aa17d, type: 3}
-  _audioPlayerPrefab: {fileID: 3330785670154951824, guid: 1026b5c48eb9498418b1551049c86a15, type: 3}
+  _coinPrefab: {fileID: 7925504897881250420, guid: b65f558870965dd4fa3cd067ac8aa17d, type: 3}
+  _audioPlayerPrefab: {fileID: 3330785670154951791, guid: 1026b5c48eb9498418b1551049c86a15, type: 3}
 --- !u!1 &2070587127
 GameObject:
   m_ObjectHideFlags: 0
@@ -3334,6 +3334,10 @@ PrefabInstance:
     - target: {fileID: 438056056136781806, guid: f2b35095d54ae20419142ce1899a8e1b, type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 6972453737981216251, guid: f2b35095d54ae20419142ce1899a8e1b, type: 3}
+      propertyPath: _minHeight
+      value: -6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f2b35095d54ae20419142ce1899a8e1b, type: 3}

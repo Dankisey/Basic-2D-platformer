@@ -54,17 +54,11 @@ public class Movement : MonoBehaviour
     {
         RaycastHit2D[] results = new RaycastHit2D[1];
         int contacts = Physics2D.BoxCast(transform.position, transform.localScale, _angle, Vector2.down, _contactFilter, results, _raycastDistance);
+        bool onGround = contacts > 0;
 
-        if (contacts > 0)
-        {
-            _animator.SetBool(PlayerAnimatorController.States.OnGround, true);
-            return true;
-        }
-        else
-        {
-            _animator.SetBool(PlayerAnimatorController.States.OnGround, false);
-            return false;
-        }
+        _animator.SetBool(PlayerAnimatorController.States.OnGround, onGround);
+        
+        return onGround;
     }
 
     private void TryJump(bool onGround)

@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    [SerializeField] private float _minHeight;
+
     private Vector2 _startPosition;
 
     public Vector2 StartPosition => _startPosition;
@@ -13,7 +15,7 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (transform.position.y < -6)
+        if (transform.position.y < _minHeight)
         {
             transform.position = _startPosition;
         }
