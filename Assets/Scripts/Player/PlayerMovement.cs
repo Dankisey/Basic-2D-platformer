@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 11;
 
     [Space]
-    [Header("Groundcheck settings")]
+    [Header("Physiccheck settings")]
     [SerializeField] private LayerMask _groundMask;
     [SerializeField] private Transform _groundCheck;
     [SerializeField] private float _circleRadius = 0.3f;
