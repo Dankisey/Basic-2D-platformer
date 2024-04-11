@@ -4,18 +4,18 @@ public class Coin: MonoBehaviour
 {
     [SerializeField] private AudioClip _collectSound;
 
-    private AudioPlayer _audioPlayer;
+    private AudioSource _audioPlayer;
 
-    public void Init(AudioPlayer audioPlayer)
+    public void Init(AudioSource audioPlayer)
     {
         _audioPlayer = audioPlayer;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player))
+        if (collision.gameObject.TryGetComponent(out Player player))
         {
-            _audioPlayer.PlaySound(_collectSound);
+            _audioPlayer.PlayOneShot(_collectSound);
             Destroy(gameObject);
         }
     }

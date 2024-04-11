@@ -6,18 +6,19 @@ public class Player : MonoBehaviour
 
     private Vector2 _startPosition;
 
-    public Vector2 StartPosition => _startPosition;
+    public void Die()
+    {
+        transform.position = _startPosition;
+    }
 
     private void Start()
     {
         _startPosition = transform.position;
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
-        if (transform.position.y < _minHeight)
-        {
-            transform.position = _startPosition;
-        }
+        if (transform.position.y < _minHeight)      
+            Die();
     }
 }

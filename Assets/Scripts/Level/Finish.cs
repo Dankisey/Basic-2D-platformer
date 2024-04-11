@@ -3,9 +3,9 @@ using UnityEngine;
 public class Finish : MonoBehaviour
 {
     [SerializeField] private AudioClip _enterSound;
-    [SerializeField] private AudioPlayer _audioPlayerPrefab;
+    [SerializeField] private AudioSource _audioPlayerPrefab;
 
-    private AudioPlayer _audioPlayer;
+    private AudioSource _audioPlayer;
     private bool _finished;
 
     private void Start()
@@ -16,9 +16,9 @@ public class Finish : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.TryGetComponent<Player>(out Player player) && _finished == false)
+        if (collision.GetComponent<Player>() && _finished == false)
         {
-            _audioPlayer.PlaySound(_enterSound);
+            _audioPlayer.PlayOneShot(_enterSound);
             _finished = true;
         }
     }

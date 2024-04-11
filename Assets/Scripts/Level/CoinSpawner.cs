@@ -3,7 +3,7 @@ using UnityEngine;
 public class CoinSpawner : MonoBehaviour
 {
     [SerializeField] private Coin _coinPrefab;
-    [SerializeField] private AudioPlayer _audioPlayerPrefab;
+    [SerializeField] private AudioSource _audioPlayerPrefab;
 
     private Transform _spawnPlaces;
     private Transform[] _spawners;
@@ -11,15 +11,12 @@ public class CoinSpawner : MonoBehaviour
     private void Start()
     {
         var audioPlayer = Instantiate(_audioPlayerPrefab);
-
         _spawnPlaces = transform;
-
         _spawners = new Transform[_spawnPlaces.childCount];
 
-        for (int i = 0; i < _spawners.Length; i++)
-        {
+        for (int i = 0; i < _spawners.Length; i++)      
             _spawners[i] = _spawnPlaces.GetChild(i);
-        }
+        
 
         for (int currentSpawner = 0; currentSpawner < _spawners.Length; currentSpawner++)
         {
