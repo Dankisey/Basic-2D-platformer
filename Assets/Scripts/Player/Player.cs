@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Player : MonoBehaviour
+public class Player : Entity
 {
     [SerializeField] private float _minHeight;
 
     private Vector2 _startPosition;
 
-    public void Die()
+    protected override void TryDie()
     {
         transform.position = _startPosition;
     }
@@ -19,6 +19,6 @@ public class Player : MonoBehaviour
     private void Update()
     {
         if (transform.position.y < _minHeight)      
-            Die();
+            TryDie();
     }
 }
