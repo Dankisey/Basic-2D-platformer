@@ -134,7 +134,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8125, y: 1}
+  m_Size: {x: 0.8, y: 1}
   m_EdgeRadius: 0
 --- !u!50 &438056056136781807
 Rigidbody2D:
@@ -198,11 +198,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 3
   _jumpForce: 11
-  _groundMask:
-    serializedVersion: 2
-    m_Bits: 8
-  _groundCheck: {fileID: 3678489204123924728}
-  _circleRadius: 0.4
+  _groundCheck: {fileID: 8972788378702023625}
+  _contactFilter:
+    useTriggers: 0
+    useLayerMask: 0
+    useDepth: 0
+    useOutsideDepth: 0
+    useNormalAngle: 0
+    useOutsideNormalAngle: 0
+    layerMask:
+      serializedVersion: 2
+      m_Bits: 0
+    minDepth: 0
+    maxDepth: 0
+    minNormalAngle: 0
+    maxNormalAngle: 0
   _wallCheckOffset: 0.06
 --- !u!114 &6972453737981216251
 MonoBehaviour:
@@ -216,6 +226,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465ff12fbdad9464ea907c0406448d5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxHealth: 20
+  _health: 20
   _minHeight: -6
 --- !u!114 &8125633867930817628
 MonoBehaviour:
@@ -238,6 +250,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3678489204123924728}
+  - component: {fileID: 8972788378702023625}
   m_Layer: 6
   m_Name: GroundCheck
   m_TagString: Untagged
@@ -254,9 +267,25 @@ Transform:
   m_GameObject: {fileID: 2104092655934743929}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.259, z: 0}
+  m_LocalPosition: {x: 0, y: -0.3, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 438056056136781794}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8972788378702023625
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2104092655934743929}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19da06d98d6d435408e6e038202d1554, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _groundMask:
+    serializedVersion: 2
+    m_Bits: 8
+  _radius: 0.4

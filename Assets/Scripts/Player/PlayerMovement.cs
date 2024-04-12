@@ -11,13 +11,11 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _jumpForce = 11;
 
     [Space]
-    [Header("Physiccheck settings")]
-    [SerializeField] private LayerMask _groundMask;
-    [SerializeField] private Transform _groundCheck;
-    [SerializeField] private float _circleRadius = 0.3f;
+    [Header("Physiccheck Settings")]
+    [SerializeField] private GroundCheck _groundCheck;
+    [SerializeField] private ContactFilter2D _contactFilter;
     [SerializeField] private float _wallCheckOffset = 0.06f;
 
-    private ContactFilter2D _contactFilter;
     private Rigidbody2D _rigidbody;
     private bool _isGrounded = true;
 
@@ -27,7 +25,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void Awake()
     {
-        _contactFilter.layerMask = _groundMask;
         _rigidbody = GetComponent<Rigidbody2D>();
     }
 
@@ -54,7 +51,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void CheckGround()
     {
-        bool isGrounded = Physics2D.OverlapCircle(_groundCheck.position, _circleRadius, _groundMask);
+        bool isGrounded = _groundCheck.CheckGround();
 
         if (isGrounded != _isGrounded)
             IsGroundedChanged?.Invoke(isGrounded);
@@ -70,9 +67,6 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(_groundCheck.position, _circleRadius);
-
         Gizmos.color = Color.blue;
         Vector3 offset = Mathf.Abs(HorizontalSpeed) > 0 ? new Vector3(_wallCheckOffset * Mathf.Sign(HorizontalSpeed), 0) : Vector3.zero;
         Vector3 center = offset + transform.position;
