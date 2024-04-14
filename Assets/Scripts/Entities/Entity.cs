@@ -4,14 +4,14 @@ public abstract class Entity : MonoBehaviour, IDamageable
 {
     [SerializeField] private Health _health;
 
-    public void ApplyHeal(float amount)
+    public void TakeHeal(float amount)
     {
-        _health.TakeHeal(amount);
+        _health.ApplyHeal(amount);
     }
 
-    public void ApplyDamage(float amount)
+    public void TakeDamage(float amount)
     {
-        _health.TakeDamage(amount);
+        _health.ApplyDamage(amount);
 
         if (Mathf.Approximately(_health.Value, 0f))
             TryDie();
@@ -22,5 +22,5 @@ public abstract class Entity : MonoBehaviour, IDamageable
 
 public interface IDamageable
 {
-    public void ApplyDamage(float amount);
+    public void TakeDamage(float amount);
 }

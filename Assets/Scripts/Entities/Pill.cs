@@ -8,7 +8,7 @@ public class Pill : MonoBehaviour
     {
         if (collision.TryGetComponent(out Entity entity))
         {
-            entity.ApplyHeal(_healthRestore);
+            entity.TakeHeal(_healthRestore);
             Destroy(gameObject);
         }
     }

@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -9,15 +11,19 @@ public class PlayerMovement : MonoBehaviour
     [Header("Gameplay Settings")]
     [SerializeField] private float _speed = 3;
     [SerializeField] private float _jumpForce = 11;
+    [SerializeField] private float _enemyJumpDamage = 5f;
+    [SerializeField] private float _enemyJumpCooldown = 0.5f;
 
     [Space]
     [Header("Physiccheck Settings")]
     [SerializeField] private GroundCheck _groundCheck;
+    [SerializeField] private GroundCheck _enemyCheck;
     [SerializeField] private ContactFilter2D _contactFilter;
     [SerializeField] private float _wallCheckOffset = 0.06f;
 
     private Rigidbody2D _rigidbody;
     private bool _isGrounded = true;
+    private bool _canJumpEnemy = true;
 
     public float HorizontalSpeed { get; private set; }
 
@@ -31,6 +37,7 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         CheckGround();
+        _enemyCheck.CheckGround();
         Move();
 
         if (Input.GetKey(KeyCode.Space))
@@ -62,7 +69,12 @@ public class PlayerMovement : MonoBehaviour
     private void TryJump()
     {
         if (_isGrounded)
-            _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
+            Jump();
+    }
+
+    private void Jump()
+    {
+        _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, _jumpForce);
     }
 
     private void OnDrawGizmos()
@@ -71,5 +83,39 @@ public class PlayerMovement : MonoBehaviour
         Vector3 offset = Mathf.Abs(HorizontalSpeed) > 0 ? new Vector3(_wallCheckOffset * Mathf.Sign(HorizontalSpeed), 0) : Vector3.zero;
         Vector3 center = offset + transform.position;
         Gizmos.DrawWireCube(center, new Vector3(0.8f,1));
+    }
+
+    private void OnEnnemyHitted(RaycastHit2D enemyHit)
+    {
+        if (_canJumpEnemy == false)
+            return;
+
+        IsGroundedChanged?.Invoke(true);
+
+        enemyHit.collider.TryGetComponent(out Enemy enemy);
+        enemy.TakeDamage(_enemyJumpDamage);
+        StartCoroutine(EnemyJumpCooldown());
+
+        Jump();
+        IsGroundedChanged?.Invoke(false);
+    }
+
+    private IEnumerator EnemyJumpCooldown()
+    {
+        _canJumpEnemy = false;
+
+        yield return new WaitForSeconds(_enemyJumpCooldown);
+
+        _canJumpEnemy = true;
+    }
+
+    private void OnEnable()
+    {
+        _enemyCheck.Hitted += OnEnnemyHitted;
+    }
+
+    private void OnDisable()
+    {
+        _enemyCheck.Hitted -= OnEnnemyHitted;
     }
 }

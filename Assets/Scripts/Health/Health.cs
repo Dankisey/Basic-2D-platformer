@@ -16,16 +16,17 @@ public class Health : MonoBehaviour
         Changed?.Invoke();
     }
  
-    public void TakeDamage(float amount)
+    public void ApplyDamage(float amount)
     {
         if (amount < 0) 
             throw new System.ArgumentOutOfRangeException(nameof(amount));
 
         Value = Mathf.Clamp(Value - amount, 0, _maxValue);
+        Debug.Log($"{Value}/{MaxValue}");
         Changed?.Invoke();
     }
 
-    public void TakeHeal(float amount)
+    public void ApplyHeal(float amount)
     {
         if (amount < 0)
             throw new System.ArgumentOutOfRangeException(nameof(amount));

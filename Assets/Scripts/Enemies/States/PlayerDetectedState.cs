@@ -97,7 +97,7 @@ public class PlayerDetectedState : State
         if (CheckHeight() == false)
             return false;
 
-        _player.ApplyDamage(_damage);
+        _player.TakeDamage(_damage);
 
         return true;
     }
