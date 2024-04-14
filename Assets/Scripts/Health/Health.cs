@@ -15,6 +15,14 @@ public class Health : MonoBehaviour
         Value = _maxValue;
         Changed?.Invoke();
     }
+
+    public float Steal(float amount)
+    { 
+        amount = Mathf.Clamp(amount, 0, Value);
+        ApplyDamage(amount);
+
+        return amount;
+    }
  
     public void ApplyDamage(float amount)
     {
@@ -22,7 +30,6 @@ public class Health : MonoBehaviour
             throw new System.ArgumentOutOfRangeException(nameof(amount));
 
         Value = Mathf.Clamp(Value - amount, 0, _maxValue);
-        Debug.Log($"{Value}/{MaxValue}");
         Changed?.Invoke();
     }
 

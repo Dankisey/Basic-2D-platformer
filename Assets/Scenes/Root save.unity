@@ -4015,14 +4015,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 4208090112361858522, guid: f2b35095d54ae20419142ce1899a8e1b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.17
-      objectReference: {fileID: 0}
-    - target: {fileID: 8972788378702023625, guid: f2b35095d54ae20419142ce1899a8e1b, type: 3}
-      propertyPath: _groundMask.m_Bits
-      value: 136
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

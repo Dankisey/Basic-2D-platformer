@@ -90,14 +90,11 @@ public class PlayerMovement : MonoBehaviour
         if (_canJumpEnemy == false)
             return;
 
-        IsGroundedChanged?.Invoke(true);
-
         enemyHit.collider.TryGetComponent(out Enemy enemy);
         enemy.TakeDamage(_enemyJumpDamage);
         StartCoroutine(EnemyJumpCooldown());
 
         Jump();
-        IsGroundedChanged?.Invoke(false);
     }
 
     private IEnumerator EnemyJumpCooldown()

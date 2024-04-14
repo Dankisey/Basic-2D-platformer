@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    [SerializeField] private Vampire _vampire;
     [SerializeField] private float _minHeight;
 
     private Vector2 _startPosition;
